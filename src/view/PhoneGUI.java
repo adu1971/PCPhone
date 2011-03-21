@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class PhoneGUI extends JFrame {
 		JPanel contactsPanel = new JPanel(new GridLayout(nRows, nCols));
 		JScrollPane sPane = new JScrollPane(contactsPanel);		
 		Dimension sBarDim = sPane.getVerticalScrollBar().getPreferredSize();
-		Dimension sBarNewDim = new Dimension(sBarDim.width*2, sBarDim.height);
+		Dimension sBarNewDim = new Dimension(sBarDim.width*3, sBarDim.height);
 		sPane.getVerticalScrollBar().setPreferredSize(sBarNewDim);
 		sPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		sPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -51,16 +52,16 @@ public class PhoneGUI extends JFrame {
 		int contactHeight = (int) (contactWidth * 1.25);
 		for (int i = 0; i < nCols; i++) {
 			for (int j = 0; j < nRows; j++) {
-				ContactPanel contactPanel = null;
+				ContactButton contactButton = null;
 				try {
 					bImage = ImageIO.read((new File("./res/Aybuke_20050828.jpg")));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				contactPanel = new ContactPanel(bImage);
-				contactPanel.setPreferredSize(new Dimension(contactWidth, contactHeight));
-				contactPanel.setBorder(new javax.swing.border.LineBorder(Color.CYAN));
-				contactsPanel.add(contactPanel);
+				contactButton = new ContactButton(bImage);
+				contactButton.setPreferredSize(new Dimension(contactWidth, contactHeight));
+				contactButton.setBorder(new javax.swing.border.LineBorder(Color.CYAN));
+				contactsPanel.add(contactButton);
 			}
 		}
 
@@ -71,4 +72,10 @@ public class PhoneGUI extends JFrame {
 		this.pack();
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("buttton pressed...");
+	}
+
+	
+	
 }

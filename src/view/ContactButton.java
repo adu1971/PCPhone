@@ -2,9 +2,11 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class ContactButton extends JButton {
+public class ContactButton extends JButton implements ActionListener {
 
 	Image image = null;
 
@@ -13,7 +15,7 @@ public class ContactButton extends JButton {
 	
 	public ContactButton(Image img) {
 		setImage(img);
-		//this.addActionListener(this);
+		this.addActionListener(this);
 	}
 
 	public void setImage(Image img) {
@@ -47,7 +49,7 @@ public class ContactButton extends JButton {
 	// }
 
 	public void actionPerformed(ActionEvent e) {
-
+		System.out.println("buttton pressed...");
 	}
 
 }
