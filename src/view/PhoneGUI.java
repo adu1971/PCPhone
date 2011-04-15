@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -21,7 +23,6 @@ public class PhoneGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private int nCols = 6;
-	private int nRows = 8;
 
 	public PhoneGUI(ArrayList<Contact> contactList) {
 		super();
@@ -37,7 +38,7 @@ public class PhoneGUI extends JFrame {
 		JMenuItem item1 = new JMenuItem("Exit");
 		menu.add(item1);
 
-		JPanel contactsPanel = new JPanel(new GridLayout(nRows, nCols));
+		JPanel contactsPanel = new JPanel(new GridLayout(0, nCols));
 		JScrollPane sPane = new JScrollPane(contactsPanel);		
 		Dimension sBarDim = sPane.getVerticalScrollBar().getPreferredSize();
 		Dimension sBarNewDim = new Dimension(sBarDim.width*3, sBarDim.height);
@@ -51,7 +52,7 @@ public class PhoneGUI extends JFrame {
 		int contactWidth = (screenSize.width - sBarNewDim.width) / nCols;
 		int contactHeight = (int) (contactWidth * 1.25);
 		for (int i = 0; i < nCols; i++) {
-			for (int j = 0; j < nRows; j++) {
+			for (int j = 0; j < 8; j++) {
 				ContactButton contactButton = null;
 				try {
 					bImage = ImageIO.read((new File("./res/Aybuke_20050828.jpg")));
@@ -60,16 +61,12 @@ public class PhoneGUI extends JFrame {
 				}
 				contactButton = new ContactButton(bImage);
 				contactButton.setPreferredSize(new Dimension(contactWidth, contactHeight));
-				contactButton.setBorder(new javax.swing.border.LineBorder(Color.CYAN));
+				contactButton.setBorder(new javax.swing.border.LineBorder(Color.BLACK));
 				contactsPanel.add(contactButton);
 			}
 		}
-
-		//	contactsPane.setPreferredSize(new Dimension(400, 400));
-		//	getContentPane().setPreferredSize(new Dimension(400,400));
-		//	this.setSize(this.getToolkit().getScreenSize()); // maximizes the frame
-		
-		this.pack();
+		this.setSize(this.getToolkit().getScreenSize()); // maximizes the frame		
+		//this.pack();
 	}
 
 	public void actionPerformed(ActionEvent e) {
