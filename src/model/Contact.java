@@ -1,39 +1,50 @@
 package model;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 public class Contact implements Serializable {
-	private String name;
-	private String surname;
-	private String phoneNumber;
-	private BufferedImage photo;
 
-	public Contact(	String name, 
-					String surname, 
+	private static final long serialVersionUID = 1L;
+	private String firstName;
+	private String lastName;
+	private String phoneNumber;
+	private SerializableImage photo;
+
+	public Contact(	String firstName, 
+					String lastName, 
 					String phoneNumber,
 					BufferedImage photo) {
-		// adı = new String(ad); litters the constant pool; newbie style code.
-		this.name = name;
-		this.surname = surname;
+		// firstName = new String(firstName); 
+		//litters the constant pool; newbie style code.
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
-		this.photo = photo;
+		try {
+			this.photo = new SerializableImage(photo);
+		} catch (InterruptedException e) {
+			System.out.println("Error while creating serializablePhoto.");
+			e.printStackTrace();
+		}
 	}
 
-	public String getName() {
-		return name;
+	public String getfirstName() {
+		return firstName;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public BufferedImage getPhote() {
-		return photo;
+	public Image getPhoto() {
+		return photo.getImage();
 	}
+
 
 }

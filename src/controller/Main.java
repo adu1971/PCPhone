@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import view.*;
 import model.*;
@@ -28,7 +29,6 @@ public class Main {
 			contactList = new ArrayList<Contact>();
 		populateContactList(contactList);
 		ser.serialize(contactList, serializationFile);
-		
 		PhoneGUI phone = new PhoneGUI(contactList);
 		phone.setVisible(true);
 	}
@@ -36,12 +36,16 @@ public class Main {
 	public static void populateContactList(ArrayList<Contact> list) {
 		BufferedImage img = null;
 		try {
-		    img = ImageIO.read(new File("Aybuke_20050828.jpg"));
+			img = ImageIO.read(new File("./res/Aybuke_20050828.jpg"));
 		} catch (IOException e) {
-		};
-		Contact contact1 = new Contact("hasan", "güngör", "888", img);
-		list.add(contact1);
+		}
 
+		Contact contact1 = null;
+
+		for (int i = 0; i < 4; i++) {
+			contact1 = new Contact("hasan", "güngör", "888", img);
+			list.add(contact1);
+		}
 	}
 
 }

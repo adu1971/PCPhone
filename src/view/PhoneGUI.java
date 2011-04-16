@@ -17,6 +17,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import model.Contact;
 
 public class PhoneGUI extends JFrame {
@@ -47,23 +49,19 @@ public class PhoneGUI extends JFrame {
 		sPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		getContentPane().add(sPane);
 
-		BufferedImage bImage = null;
-		Dimension screenSize = this.getToolkit().getScreenSize();
-		int contactWidth = (screenSize.width - sBarNewDim.width) / nCols;
-		int contactHeight = (int) (contactWidth * 1.25);
-		for (int i = 0; i < nCols; i++) {
-			for (int j = 0; j < 8; j++) {
-				ContactButton contactButton = null;
-				try {
-					bImage = ImageIO.read((new File("./res/Aybuke_20050828.jpg")));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				contactButton = new ContactButton(bImage);
-				contactButton.setPreferredSize(new Dimension(contactWidth, contactHeight));
-				contactButton.setBorder(new javax.swing.border.LineBorder(Color.BLACK));
-				contactsPanel.add(contactButton);
-			}
+
+		
+		
+		Contact contact = null;
+		ContactButton contactButton = null;
+		Iterator<Contact> it = contactList.iterator();
+		while (it.hasNext()) {
+			contact = it.next();
+			contactButton = new ContactButton(contact);
+//			contactButton.setPreferredSize(new Dimension(contactWidth, contactHeight));
+			contactButton.setBorder(new javax.swing.border.LineBorder(Color.BLACK));
+			contactsPanel.add(contactButton);
+			
 		}
 		this.setSize(this.getToolkit().getScreenSize()); // maximizes the frame		
 		//this.pack();
