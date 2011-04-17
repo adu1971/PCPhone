@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import view.*;
 import model.*;
@@ -17,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ArrayList<Contact> contactList = null;
-		String serializationFile = "temasListesi.ser";
+		String serializationFile = "contactList.ser";
 		
 		PropertyManager rm = new PropertyManager();
 		Properties props = rm.readProperties();
@@ -25,12 +23,10 @@ public class Main {
 		Serializer ser = new Serializer();
 		contactList =  (ArrayList<Contact>) ser.deserialize(serializationFile);
 		
-		if (contactList==null)
-			contactList = new ArrayList<Contact>();
-		populateContactList(contactList);
+		if (contactList==null) contactList = new ArrayList<Contact>();
+		//populateContactList(contactList);
 		ser.serialize(contactList, serializationFile);
 		PhoneGUI phone = new PhoneGUI(contactList);
-		phone.setVisible(true);
 	}
 	
 	public static void populateContactList(ArrayList<Contact> list) {

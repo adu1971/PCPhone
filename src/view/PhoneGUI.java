@@ -2,14 +2,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -21,7 +16,7 @@ import java.util.Iterator;
 
 import model.Contact;
 
-public class PhoneGUI extends JFrame {
+public class PhoneGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private int nCols = 6;
@@ -37,7 +32,15 @@ public class PhoneGUI extends JFrame {
 		setJMenuBar(greenMenuBar);
 		JMenu menu = new JMenu("File");
 		greenMenuBar.add(menu);
-		JMenuItem item1 = new JMenuItem("Exit");
+		JMenuItem item1 = new JMenuItem("New Contact");
+		item1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ContactEditor();
+			}
+		});
+		menu.add(item1);
+		
+		item1 = new JMenuItem("Exit");
 		menu.add(item1);
 
 		JPanel contactsPanel = new JPanel(new GridLayout(0, nCols));
@@ -49,9 +52,6 @@ public class PhoneGUI extends JFrame {
 		sPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		getContentPane().add(sPane);
 
-
-		
-		
 		Contact contact = null;
 		ContactButton contactButton = null;
 		Iterator<Contact> it = contactList.iterator();
@@ -63,14 +63,14 @@ public class PhoneGUI extends JFrame {
 			contactsPanel.add(contactButton);
 			
 		}
-		this.setSize(this.getToolkit().getScreenSize()); // maximizes the frame		
+		this.setSize(this.getToolkit().getScreenSize()); // maximizes the frame	
+		this.setVisible(true);
 		//this.pack();
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("buttton pressed...");
+		System.out.println(e.getSource());
+		
 	}
 
-	
-	
 }
