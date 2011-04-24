@@ -34,6 +34,7 @@ public class Main {
 		try {
 			img = ImageIO.read(new File("./res/Aybuke_20050828.jpg"));
 		} catch (IOException e) {
+			System.out.println("IOException while reading image file...");
 		}
 
 		Contact contact1 = null;

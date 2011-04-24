@@ -5,6 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,6 +25,13 @@ public class PhoneGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private int nCols = 6;
+			
+	private Contact dummyContact = new Contact(
+			"Ad giriniz...",
+			"Soyad Giriniz...", 
+			"Telefon giriniz...",
+			"./res/list-add-contact.png");
+	
 
 	public PhoneGUI(ArrayList<Contact> contactList) {
 		super();
@@ -33,9 +45,13 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		JMenu menu = new JMenu("File");
 		greenMenuBar.add(menu);
 		JMenuItem item1 = new JMenuItem("New Contact");
+		
+
+
+		
 		item1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ContactEditor();
+				new ContactEditor(dummyContact);
 			}
 		});
 		menu.add(item1);

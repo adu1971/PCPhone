@@ -2,7 +2,11 @@ package model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
 
 public class Contact implements Serializable {
 
@@ -11,20 +15,34 @@ public class Contact implements Serializable {
 	private String lastName;
 	private String phoneNumber;
 	private SerializableImage photo;
-
+	
+	public Contact(	String firstName, 
+			String lastName, 
+			String phoneNumber,
+			String pathToPhoto) {		
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(new File(pathToPhoto));
+		} catch (IOException e) {
+			System.out.println("IOException while reading dummy image...");
+		}
+		new Contact(firstName, lastName, phoneNumber, img);	
+	};
+	
 	public Contact(	String firstName, 
 					String lastName, 
 					String phoneNumber,
 					BufferedImage photo) {
+	
+		
 		// firstName = new String(firstName); 
 		//litters the constant pool; newbie style code.
-		
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		try {
 			this.photo = new SerializableImage(photo);
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			System.out.println("Error while creating serializablePhoto.");
 			e.printStackTrace();
 		}
