@@ -8,39 +8,56 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
 import model.Contact;
 
 public class ContactEditor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
+	private Contact dummyContact; 
+	
 	public ContactEditor(Contact contact) {
 		super();
-		setTitle("Contact Editor");
-		setVisible(true);
-		setLayout(new GridBagLayout());
-		
+		setTitle("Contact Editor");		
 		Label label1 = new Label("First Name:");
 		Label label2 = new Label("Last Name:");
 		Label label3 = new Label("Phone Number:");
-		TextField field1 = new TextField(20);
-		TextField field2 = new TextField(20);
-		TextField field3 = new TextField(20);
+		TextField fieldFirstName = new TextField(20);
+		TextField fieldLastName = new TextField(20);
+		TextField fieldPhoneNumber = new TextField(20);
 		JButton okButton = new JButton("Save");
-		okButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				//***********************
-			}
-		});
 		JButton cancelButton = new JButton("Cancel");
+		
+		dummyContact = new Contact(
+				"Ad giriniz...",
+				"Soyad Giriniz...", 
+				"Telefon giriniz...",
+				"./res/list-add-contact.png");
+		if (contact==null) contact = dummyContact;
+		ContactButton ctButton = new ContactButton(dummyContact);
+		fieldFirstName.setText(contact.getFirstName());
+		fieldLastName.setText(contact.getLastName());
+		fieldPhoneNumber.setText(contact.getPhoneNumber());
+
+
+//		okButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if (!fieldPhoneNumber.getText().isEmpty() & 
+//				(!fieldFirstName.getText().isEmpty() | 
+//						!fieldLastName.getText().isEmpty())) {
+//					contact.setFirstName(fieldFirstName.getText());
+//					contact.setLastName(fieldLastName.getText());
+//					contact.setPhoneNumber(fieldPhoneNumber.getText());
+//					contact.setPhoto(ctButton.getContact().getBufferedPhoto());
+//				}
+//			}
+//		});
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
 		});
 		
+		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
@@ -54,11 +71,11 @@ public class ContactEditor extends JFrame {
 		
 		c.gridx = 1;
 		c.gridy = 0;
-		add(field1, c);
+		add(fieldFirstName, c);
 		c.gridy = 1;
-		add(field2, c);
+		add(fieldLastName, c);
 		c.gridy = 2;
-		add(field3, c);
+		add(fieldPhoneNumber, c);
 		c.gridy = 3;
 		add(cancelButton, c);
 			
@@ -66,9 +83,11 @@ public class ContactEditor extends JFrame {
 		c.gridy = 0;
 		c.gridheight = 3;
 		c.weightx = 1.0;
-		c.fill = GridBagConstraints.BOTH;
-		add(new ContactButton(null), c);
+		//c.fill = GridBagConstraints.BOTH;
+		add(ctButton, c);
+		setVisible(true);
 		this.pack();
 		this.setLocationRelativeTo(null);		
 	}
+
 }

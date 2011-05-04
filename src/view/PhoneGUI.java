@@ -24,14 +24,7 @@ import model.Contact;
 public class PhoneGUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private int nCols = 6;
-			
-	private Contact dummyContact = new Contact(
-			"Ad giriniz...",
-			"Soyad Giriniz...", 
-			"Telefon giriniz...",
-			"./res/list-add-contact.png");
-	
+	private int nCols = 6;	
 
 	public PhoneGUI(ArrayList<Contact> contactList) {
 		super();
@@ -51,7 +44,7 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		
 		item1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ContactEditor(dummyContact);
+				new ContactEditor(null);
 			}
 		});
 		menu.add(item1);

@@ -35,4 +35,5 @@ public class SerializableImage implements Serializable {
 		pg.grabPixels();
 		return pixels;
 	}
+
 }
