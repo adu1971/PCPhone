@@ -1,9 +1,7 @@
 package model;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import javax.imageio.ImageIO;
 
@@ -13,33 +11,37 @@ public class Contact implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private SerializableImage photo;
+	private SerializableBufferedImage photo;
+	//private BufferedImage photo;
 	
 	public Contact(	String firstName, 
 			String lastName, 
 			String phoneNumber,
 			String pathToPhoto) {	
-		BufferedImage bPhoto = null;		
-		try {
-			bPhoto = ImageIO.read(new File(pathToPhoto));
-		} catch (IOException e) {
-			System.out.println("IOException while reading dummy image...");
-		}
-		new Contact(firstName, lastName, phoneNumber, bPhoto);	
-	};
-	
-	public Contact(	String firstName, 
-					String lastName, 
-					String phoneNumber,
-					BufferedImage photo) {	
-		
+
 		// firstName = new String(firstName); 
 		//litters the constant pool; newbie style code.
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		try {
-			this.photo = new SerializableImage(photo);
+			BufferedImage bufImg = ImageIO.read(new File(pathToPhoto));
+			this.photo = new SerializableBufferedImage(bufImg);
+		} catch (Exception e) {
+			System.out.println("Error while creating SerializableImage...");
+		}
+	}
+	
+	public Contact(String firstName, String lastName, String phoneNumber,
+			BufferedImage photo) {
+
+		// firstName = new String(firstName);
+		// litters the constant pool; newbie style code.
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		try {
+			this.photo = new SerializableBufferedImage(photo);
 		} catch (Exception e) {
 			System.out.println("Error while creating serializablePhoto.");
 			e.printStackTrace();
@@ -58,12 +60,8 @@ public class Contact implements Serializable {
 		return phoneNumber;
 	}
 
-	public Image getPhoto() {
-		if (this.photo==null) {
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-			System.out.println(this.firstName);
-		} 			
-		return photo.getImage();
+	public SerializableBufferedImage getPhoto() {
+		return photo;
 	}
 
 	public void setFirstName(String fName) {
@@ -78,13 +76,17 @@ public class Contact implements Serializable {
 		phoneNumber = pNumber;
 	}
 
-	public void setPhoto(BufferedImage p) {
+	public void setPhoto(BufferedImage bufImg) {
 		try {
-			this.photo = new SerializableImage(p);
+			photo = new SerializableBufferedImage(bufImg);
 		} catch (Exception e) {
 			System.out.println("Error while creating serializablePhoto.");
 			e.printStackTrace();
 		}
+	}
+
+	public void setPhoto(SerializableBufferedImage serBufImg) {
+		photo = serBufImg;
 	}
 
 }
