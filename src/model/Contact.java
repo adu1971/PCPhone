@@ -8,21 +8,18 @@ import javax.imageio.ImageIO;
 public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private String phoneNumber;
 	private SerializableBufferedImage photo;
 	//private BufferedImage photo;
 	
-	public Contact(	String firstName, 
-			String lastName, 
+	public Contact(	String name, 
 			String phoneNumber,
 			String pathToPhoto) {	
 
 		// firstName = new String(firstName); 
 		//litters the constant pool; newbie style code.
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.phoneNumber = phoneNumber;
 		try {
 			BufferedImage bufImg = ImageIO.read(new File(pathToPhoto));
@@ -37,8 +34,7 @@ public class Contact implements Serializable {
 
 		// firstName = new String(firstName);
 		// litters the constant pool; newbie style code.
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.phoneNumber = phoneNumber;
 		try {
 			this.photo = new SerializableBufferedImage(photo);
@@ -48,12 +44,8 @@ public class Contact implements Serializable {
 		}
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
+	public String getName() {
+		return name;
 	}
 
 	public String getPhoneNumber() {
@@ -64,12 +56,8 @@ public class Contact implements Serializable {
 		return photo;
 	}
 
-	public void setFirstName(String fName) {
-		firstName = fName;
-	}
-
-	public void setLastName(String lName) {
-		lastName = lName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setPhoneNumber(String pNumber) {
