@@ -10,7 +10,6 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -33,10 +32,8 @@ public class ContactEditor extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private Contact contact = null;
 	private Label label1 = new Label("First Name:");
-	private Label label2 = new Label("Last Name:");
-	private Label label3 = new Label("Phone Number:");
-	private TextField fieldFirstName = new TextField(20);
-	private TextField fieldLastName = new TextField(20);
+	private Label label2 = new Label("Phone Number:");
+	private TextField fieldName = new TextField(20);
 	private TextField fieldPhoneNumber = new TextField(20);
 	private SerializableBufferedImage serImg = null;
 	private JButton photoButton = null;
@@ -44,7 +41,6 @@ public class ContactEditor extends JDialog {
 	private JButton cancelButton = new JButton("Cancel");
 	private Contact dummyContact = new Contact(
 			"Ad giriniz...",
-			"Soyad giriniz...",
 			"Telefon giriniz...",
 			"./res/list-add-contact.png");
 	private File photoFile = null;
@@ -56,8 +52,7 @@ public class ContactEditor extends JDialog {
 		contact = ct;
 		if (contact==null) contact = dummyContact;
 		
-		fieldFirstName.setText(contact.getFirstName());
-		fieldLastName.setText(contact.getLastName());
+		fieldName.setText(contact.getName());
 		fieldPhoneNumber.setText(contact.getPhoneNumber());
 		serImg = contact.getPhoto();
 
@@ -75,20 +70,16 @@ public class ContactEditor extends JDialog {
 		add(label1, c);
 		c.gridy = 1;
 		add(label2, c);
-		c.gridy = 2;
-		add(label3, c);
 	
 		c.gridx = 1;
 		c.gridy = 0;
-		add(fieldFirstName, c);
+		add(fieldName, c);
 		c.gridy = 1;
-		add(fieldLastName, c);
-		c.gridy = 2;
 		add(fieldPhoneNumber, c);
 	
 		c.gridx = 2;
 		c.gridy = 0;
-		c.gridheight = 3;
+		c.gridheight = 2;
 		c.fill = GridBagConstraints.BOTH;
 		add(photoButton, c);
 
@@ -98,7 +89,7 @@ public class ContactEditor extends JDialog {
 		bottomPanel.add(cancelButton);
 
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 2;
 		c.gridwidth = 3;
 		c.insets = new Insets(20,0,10,0);
 		add(bottomPanel, c);
@@ -150,10 +141,8 @@ public class ContactEditor extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 					
 			if (!fieldPhoneNumber.getText().isEmpty()
-					& (!fieldFirstName.getText().isEmpty() | !fieldLastName
-							.getText().isEmpty())) {
-				contact.setFirstName(fieldFirstName.getText());
-				contact.setLastName(fieldLastName.getText());
+				& !fieldName.getText().isEmpty() ) {
+				contact.setName(fieldName.getText());
 				contact.setPhoneNumber(fieldPhoneNumber.getText());
 				contact.setPhoto(serImg);
 			}

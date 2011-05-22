@@ -147,8 +147,6 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		int retval = ctEditor.showEditor();
 		if (retval == ContactEditor.APPROVE_OPTION) {
 			ct = ctEditor.getContact();
-			System.out.println(ct);
-			contactList.add(ct);
 			ser.serialize(contactList);
 			layoutContacts();
 		} 
