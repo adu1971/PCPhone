@@ -31,24 +31,24 @@ public class ContactEditor extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private Contact contact = null;
-	private Label label1 = new Label("First Name:");
-	private Label label2 = new Label("Phone Number:");
+	private Label label1 = new Label("Ad:");
+	private Label label2 = new Label("Telefon:");
 	private TextField fieldName = new TextField(20);
 	private TextField fieldPhoneNumber = new TextField(20);
 	private SerializableBufferedImage serImg = null;
 	private JButton photoButton = null;
-	private JButton okButton = new JButton("Save");
-	private JButton cancelButton = new JButton("Cancel");
+	private JButton okButton = new JButton("Kaydet");
+	private JButton cancelButton = new JButton("İptal");
 	private Contact dummyContact = new Contact(
-			"Ad giriniz...",
-			"Telefon giriniz...",
+			"...",
+			"...",
 			"./res/list-add-contact.png");
 	private File photoFile = null;
 	private ContactEditor ctEditor = this;
 	
 	public ContactEditor(Contact ct, Frame owner) {
 		super(owner);
-		setTitle("Contact Editor");
+		setTitle("Temas Noktası Düzenleyici");
 		contact = ct;
 		if (contact==null) contact = dummyContact;
 		
@@ -67,6 +67,7 @@ public class ContactEditor extends JDialog {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
+		c.ipady = 20;
 		add(label1, c);
 		c.gridy = 1;
 		add(label2, c);
@@ -114,7 +115,7 @@ public class ContactEditor extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			final JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home"));
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileChooser.setDialogTitle("Please select the picture file...");
+			fileChooser.setDialogTitle("Resim dosyasını seçiniz...");
 			int retval = fileChooser.showOpenDialog(ctEditor);
 			if (retval == JFileChooser.APPROVE_OPTION) {
 				photoFile = fileChooser.getSelectedFile();
