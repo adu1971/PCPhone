@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import gnu.io.*;
 
-public class Dialer implements Runnable, SerialPortEventListener {
+public class Dialer implements SerialPortEventListener {
 
 	static CommPortIdentifier portId;
 	static Enumeration portList;
@@ -12,7 +12,6 @@ public class Dialer implements Runnable, SerialPortEventListener {
 	InputStream inputStream;
 	OutputStream outputStream;
 	SerialPort serialPort;
-	Thread dialerThread;
 	String telNo;
 	String dialCommand;
 	static FileOutputStream fos = null;
@@ -20,22 +19,18 @@ public class Dialer implements Runnable, SerialPortEventListener {
 	boolean flag = false;
 	int conCount = 0;
 
-	public Dialer(String[] args) {
+	public Dialer(String phoneNumber) {
 		try {
-			fos = new FileOutputStream("dem.txt", true);
-			output = new FileOutputStream("abc.txt", true);
+			fos = new FileOutputStream("./res/dem.txt", true);
+			output = new FileOutputStream("./res/abc.txt", true);
 		} catch (Exception e) {
-		}
-		if (args.length != 1) {
-			System.err.println("Usage: Dialup ");
-			return;
 		}
 		portList = CommPortIdentifier.getPortIdentifiers();
 		while (portList.hasMoreElements()) {
 			portId = (CommPortIdentifier) portList.nextElement();
 			if (portId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
 				if (portId.getName().equals("COM3")) {
-					dial(args[0]);
+					dial(phoneNumber);
 				}
 			}
 		}
@@ -75,28 +70,20 @@ public class Dialer implements Runnable, SerialPortEventListener {
 		serialPort.notifyOnParityError(true);
 		serialPort.notifyOnRingIndicator(true);
 
-		dialerThread = new Thread(this);
-		dialerThread.start();
-	}
-
-	
-	public void run() {
-		while (true) {
-			if (conCount == 0) {
-				try {
-					if (!serialPort.isCD()) {
-						System.err.println("Try to connect ...");
-						outputStream.write(dialCommand.getBytes());
-					}
-					Thread.sleep(60000);
-				} catch (Exception ex) {
-					System.err.println(ex);
+		if (conCount == 0) {
+			try {
+				if (!serialPort.isCD()) {
+					System.out.println("Try to connect ...");
+					outputStream.write(dialCommand.getBytes());
 				}
-			} 
-		}
+				Thread.sleep(60000);
+			} catch (Exception ex) {
+				System.err.println(ex);
+			}
+		} 
 	}
 
-	
+
 	public void serialEvent(SerialPortEvent event) {
 		switch (event.getEventType()) {
 		case SerialPortEvent.OE:

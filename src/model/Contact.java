@@ -17,8 +17,6 @@ public class Contact implements Serializable {
 			String phoneNumber,
 			String pathToPhoto) {	
 
-		// firstName = new String(firstName); 
-		//litters the constant pool; newbie style code.
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		try {
@@ -29,11 +27,9 @@ public class Contact implements Serializable {
 		}
 	}
 	
-	public Contact(String firstName, String lastName, String phoneNumber,
+	public Contact(String name, String phoneNumber,
 			BufferedImage photo) {
 
-		// firstName = new String(firstName);
-		// litters the constant pool; newbie style code.
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		try {

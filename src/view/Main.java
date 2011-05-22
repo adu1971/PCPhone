@@ -1,6 +1,4 @@
-package controller;
-
-import view.*;
+package view;
 
 public class Main {
 

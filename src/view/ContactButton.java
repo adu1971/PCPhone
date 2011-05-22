@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import model.Contact;
+import model.Dialer;
 
 public class ContactButton extends JButton implements ActionListener {
 
@@ -60,6 +61,8 @@ public class ContactButton extends JButton implements ActionListener {
 		} else if (getCursor()==Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)) {
 			getTopLevelAncestor().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			phoneGUI.editContact(getContact());
+		} else {
+			new Dialer(contact.getPhoneNumber());
 		}
 	}
 

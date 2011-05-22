@@ -38,7 +38,7 @@ public class ContactEditor extends JDialog {
 	private SerializableBufferedImage serImg = null;
 	private JButton photoButton = null;
 	private JButton okButton = new JButton("Kaydet");
-	private JButton cancelButton = new JButton("Ä°ptal");
+	private JButton cancelButton = new JButton("Ýptal");
 	private Contact dummyContact = new Contact(
 			"...",
 			"...",
@@ -48,7 +48,7 @@ public class ContactEditor extends JDialog {
 	
 	public ContactEditor(Contact ct, Frame owner) {
 		super(owner);
-		setTitle("Temas NoktasÄ± DÃ¼zenleyici");
+		setTitle("Temas Noktasý Düzenleyici");
 		contact = ct;
 		if (contact==null) contact = dummyContact;
 		
@@ -115,7 +115,7 @@ public class ContactEditor extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			final JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home"));
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileChooser.setDialogTitle("Resim dosyasÄ±nÄ± seÃ§iniz...");
+			fileChooser.setDialogTitle("Resim dosyasýný seçiniz...");
 			int retval = fileChooser.showOpenDialog(ctEditor);
 			if (retval == JFileChooser.APPROVE_OPTION) {
 				photoFile = fileChooser.getSelectedFile();

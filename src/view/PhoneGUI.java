@@ -42,22 +42,22 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		greenMenuBar.setOpaque(true);
 		greenMenuBar.setBackground(new Color(154, 165, 127));
 		setJMenuBar(greenMenuBar);
-		JMenu menu = new JMenu("File");
+		JMenu menu = new JMenu("Ýþlem");
 		greenMenuBar.add(menu);
 		
-		JMenuItem item1 = new JMenuItem("New Contact");
+		JMenuItem item1 = new JMenuItem("Yeni kayýt");
 		item1.addActionListener(newContactListener);
 		menu.add(item1);
 		
-		item1 = new JMenuItem("Delete Contact");
+		item1 = new JMenuItem("Sil");
 		item1.addActionListener(deleteContactListener);
 		menu.add(item1);
 		
-		item1 = new JMenuItem("Edit Contact");
+		item1 = new JMenuItem("Düzenle");
 		item1.addActionListener(editContactListener);
 		menu.add(item1);
 		
-		item1 = new JMenuItem("Exit");
+		item1 = new JMenuItem("Çýkýþ");
 		item1.addActionListener(exitListener);
 		menu.add(item1);
 
