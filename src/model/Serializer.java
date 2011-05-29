@@ -11,14 +11,17 @@ public class Serializer {
 	
 	private File serializationFile = null;
 
-	public Serializer(String fileName) {
-		serializationFile = new File(fileName);
-		if (!serializationFile.exists()) {
-			try {
+	public Serializer() {
+
+		try {
+			serializationFile = new File("TelefonDefteri.ser");
+			if (!serializationFile.exists()) {
 				serializationFile.createNewFile();
-			} catch (IOException e) {
-				System.out.println("adu: Serializer could not create a new serialization file!");
 			}
+		} catch (Exception e) {
+			System.err.println("adu: Serializer could not create a new serialization file!");
+			System.out.println(System.getProperty("user.dir"));
+			e.printStackTrace();
 		}
 	}
 	
@@ -33,7 +36,7 @@ public class Serializer {
 			ois.close();
 			fis.close();
 		} catch (IOException e) {
-			System.out.println("adu: IOException in " + this.getClass().getName());
+			System.err.println("adu: IOException in " + this.getClass().getName());
 			e.printStackTrace(); 
 		} catch (ClassNotFoundException e) {
 			System.out.println("adu: ClassNotFoundException in " + this.getClass().getName());

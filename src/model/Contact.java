@@ -2,6 +2,7 @@ package model;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 import javax.imageio.ImageIO;
 
@@ -11,7 +12,6 @@ public class Contact implements Serializable {
 	private String name;
 	private String phoneNumber;
 	private SerializableBufferedImage photo;
-	//private BufferedImage photo;
 	
 	public Contact(	String name, 
 			String phoneNumber,
@@ -21,6 +21,20 @@ public class Contact implements Serializable {
 		this.phoneNumber = phoneNumber;
 		try {
 			BufferedImage bufImg = ImageIO.read(new File(pathToPhoto));
+			this.photo = new SerializableBufferedImage(bufImg);
+		} catch (Exception e) {
+			System.out.println("Error while creating SerializableImage...");
+		}
+	}
+
+	public Contact(	String name, 
+			String phoneNumber,
+			InputStream inStream) {	
+
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		try {
+			BufferedImage bufImg = ImageIO.read(inStream);
 			this.photo = new SerializableBufferedImage(bufImg);
 		} catch (Exception e) {
 			System.out.println("Error while creating SerializableImage...");

@@ -42,7 +42,7 @@ public class ContactEditor extends JDialog {
 	private Contact dummyContact = new Contact(
 			"...",
 			"...",
-			"./res/list-add-contact.png");
+			getClass().getResourceAsStream("/res/list-add-contact.png"));
 	private File photoFile = null;
 	private ContactEditor ctEditor = this;
 	

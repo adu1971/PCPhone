@@ -26,7 +26,8 @@ public class PhoneGUI extends JFrame implements ActionListener {
 	private int nCols = 6;	
 	private JPanel contactsPanel = new JPanel(new GridLayout(0, nCols));
 	private JFrame phoneGUI = this;
-	private Serializer ser = new Serializer("./res/contactList.ser");
+
+	private Serializer ser = new Serializer();
 	
 	public PhoneGUI() {
 		super();
@@ -76,18 +77,17 @@ public class PhoneGUI extends JFrame implements ActionListener {
 	
 	
 	public void layoutContacts() {
+		this.setVisible(false);
 		if (contactList==null) return;
 		contactsPanel.removeAll();
 		Iterator<Contact> it = contactList.iterator();
 		while (it.hasNext()) {
 			contact = it.next();
 			contactButton = new ContactButton(contact, this);
-//			contactButton.setPreferredSize(new Dimension(contactWidth, contactHeight));
-			contactButton.setBorder(new javax.swing.border.LineBorder(Color.YELLOW));
+			contactButton.setBorder(new javax.swing.border.LineBorder(Color.RED));
 			contactsPanel.add(contactButton);
-		}
-		contactsPanel.validate();
-		this.validate();
+		}	
+		this.setVisible(true);
 	}
 	
 
