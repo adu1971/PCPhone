@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ public class PhoneGUI extends JFrame implements ActionListener {
 	private ContactButton contactButton = null;
 	private int nCols = 6;	
 	private JPanel contactsPanel = new JPanel(new GridLayout(0, nCols));
+	private JScrollPane sPane = new JScrollPane(contactsPanel);		
 	private JFrame phoneGUI = this;
 
 	private Serializer ser = new Serializer();
@@ -43,10 +45,10 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		greenMenuBar.setOpaque(true);
 		greenMenuBar.setBackground(new Color(154, 165, 127));
 		setJMenuBar(greenMenuBar);
-		JMenu menu = new JMenu("Ýþlem");
+		JMenu menu = new JMenu("ï¿½ï¿½lem");
 		greenMenuBar.add(menu);
 		
-		JMenuItem item1 = new JMenuItem("Yeni kayýt");
+		JMenuItem item1 = new JMenuItem("Yeni kayï¿½t");
 		item1.addActionListener(newContactListener);
 		menu.add(item1);
 		
@@ -54,15 +56,14 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		item1.addActionListener(deleteContactListener);
 		menu.add(item1);
 		
-		item1 = new JMenuItem("Düzenle");
+		item1 = new JMenuItem("Dï¿½zenle");
 		item1.addActionListener(editContactListener);
 		menu.add(item1);
 		
-		item1 = new JMenuItem("Çýkýþ");
+		item1 = new JMenuItem("ï¿½ï¿½kï¿½ï¿½");
 		item1.addActionListener(exitListener);
 		menu.add(item1);
 
-		JScrollPane sPane = new JScrollPane(contactsPanel);		
 		Dimension sBarDim = sPane.getVerticalScrollBar().getPreferredSize();
 		Dimension sBarNewDim = new Dimension(sBarDim.width*3, sBarDim.height);
 		sPane.getVerticalScrollBar().setPreferredSize(sBarNewDim);
@@ -71,23 +72,25 @@ public class PhoneGUI extends JFrame implements ActionListener {
 		getContentPane().add(sPane);
 		layoutContacts();
 
-		this.setSize(this.getToolkit().getScreenSize()); // maximizes the frame	
-		this.setVisible(true);
+		setSize(getToolkit().getScreenSize()); // maximizes the frame	
+		setVisible(true);
 	}
-	
+
 	
 	public void layoutContacts() {
-		this.setVisible(false);
 		if (contactList==null) return;
+		setVisible(false);
 		contactsPanel.removeAll();
-		Iterator<Contact> it = contactList.iterator();
+		Iterator<Contact> it = contactList.iterator();	
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int ctBtnWidth = (tk.getScreenSize().width - 80) / nCols;
+		Dimension ctBtnDim = new Dimension(ctBtnWidth, (int) (ctBtnWidth * 1.2));
 		while (it.hasNext()) {
 			contact = it.next();
-			contactButton = new ContactButton(contact, this);
-			contactButton.setBorder(new javax.swing.border.LineBorder(Color.RED));
+			contactButton = new ContactButton(contact, ctBtnDim,  this);
 			contactsPanel.add(contactButton);
 		}	
-		this.setVisible(true);
+		setVisible(true);
 	}
 	
 
